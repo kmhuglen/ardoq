@@ -6,7 +6,7 @@ Version 0.0.1.1 is available from PowerShell Gallery: https://www.powershellgall
 You would need a token to access your organization. Read the Authorization documentation located at the Ardoq REST API Documentation to get your token: https://app.ardoq.com/presentation/ardoqAPI/slide/0/
 
 #Example
-
+<pre>
 PS C:\> Find-Package Ardoq -Source PSGallery|Install-Module
 PS C:\> New-ArdoqAPIHeader -Token <token> -SetGlobal
 
@@ -30,3 +30,4 @@ State 1              State              Dummy User         0.0.1
 Item 1               Item               Dummy User         0.0.1  
 Input/Output 1       Input/Output       Dummy User         0.0.1  
 Decision 1           Decision           Dummy User         0.0.1  
+</pre>
