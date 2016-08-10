@@ -8,7 +8,7 @@ You would need a token to access your organization. Read the Authorization docum
 #Example
 <pre>
 PS C:\> Find-Package Ardoq -Source PSGallery|Install-Module
-PS C:\> New-ArdoqAPIHeader -Token <token> -SetGlobal
+PS C:\> New-ArdoqAPIHeader -Token 11223344556677889900aabbccddeeff -SetGlobal
 
 Name                           Value                                                                                                  
 ----                           -----                                                                                                  
