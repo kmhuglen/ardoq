@@ -212,7 +212,7 @@ Function Update-ArdoqComponent{
     
     IF ($Force)
     {
-        $ForceObject = Get-ArdoqComponentbyID -Id $Object._id
+        $ForceObject = Get-ArdoqComponent -Id $Object._id
         $Object._version = $ForceObject._version
     }
 
