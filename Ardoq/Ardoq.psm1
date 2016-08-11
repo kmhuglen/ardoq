@@ -270,7 +270,7 @@ Function New-ArdoqComponent{
 
     $URI = "$BaseURI/component"
 
-    $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $json -verbose
+    $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $json
     $Object
 }
 Function Get-ArdoqModel{
