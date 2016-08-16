@@ -177,10 +177,6 @@ Function Get-ArdoqComponent{
 Function Update-ArdoqComponent{
     [CmdletBinding()] 
     Param(
-        [parameter(Mandatory=$false)] 
-        [string]
-        $Id
-        ,
         [Parameter(Mandatory=$True, 
         ValueFromPipeline=$True)]
         [Object]
@@ -232,7 +228,12 @@ Function Remove-ArdoqComponent{
     Param(
         [parameter(Mandatory=$false)] 
         [string]
-        $Id
+        $id
+        ,
+        [Parameter(Mandatory=$True, 
+        ValueFromPipeline=$True)]
+        [Object]
+        $Object
         ,
         [parameter(Mandatory=$false)] 
         [hashtable]
