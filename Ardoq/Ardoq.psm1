@@ -187,10 +187,6 @@ Function Update-ArdoqComponent{
         $Object
         ,
         [parameter(Mandatory=$false)] 
-        [string]
-        $Token = $Token
-        ,
-        [parameter(Mandatory=$false)] 
         [switch]
         $Force
         ,
@@ -230,6 +226,32 @@ Function Update-ArdoqComponent{
     {
         $Object
     }
+}
+Function Remove-ArdoqComponent{
+    [CmdletBinding()] 
+    Param(
+        [parameter(Mandatory=$false)] 
+        [string]
+        $Id
+        ,
+        [parameter(Mandatory=$false)] 
+        [hashtable]
+        $Headers = $ArdoqAPIHeader
+        ,
+        [parameter(Mandatory=$false)] 
+        [string]
+        $BaseURI = $ArdoqAPIBaseUri
+    )
+
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+    IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
+    
+    IF(!$Id){Write-error -Message 'Ardoq Component Id not specified.' -ErrorAction Stop}
+       
+    $URI = "$BaseURI/component/$id)"
+
+    $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
+    $Object
 }
 Function New-ArdoqComponent{
     [CmdletBinding()] 
