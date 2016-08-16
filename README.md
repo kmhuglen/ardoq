@@ -1,16 +1,16 @@
 # Ardoq
 PowerShell wrapper for the public Ardoq REST API - https://ardoq.com/api/
 
-## Release notes
-0.0.1.5 - Added UTF8 encoding to Update-ArdoqComponent and New-ArdoqComponent
-0.0.1.4 - Removed verbose from New-ArdoqComponent
-0.0.1.3 - Added function New-ArdoqComponent
-0.0.1.2 - Fixed -Force argument on Function Update-ArdoqComponent
-0.0.1.1 - Initial version
-
 Available from PowerShell Gallery: https://www.powershellgallery.com/packages/Ardoq
 
 You would need a token to access your organization. Read the Authorization documentation located at the Ardoq REST API Documentation to get your token: https://app.ardoq.com/presentation/ardoqAPI/slide/0/
+
+## Release notes
+0.0.1.5 - Added UTF8 encoding to Update-ArdoqComponent and New-ArdoqComponent<br>
+0.0.1.4 - Removed verbose from New-ArdoqComponent<br>
+0.0.1.3 - Added function New-ArdoqComponent<br>
+0.0.1.2 - Fixed -Force argument on Function Update-ArdoqComponent<br>
+0.0.1.1 - Initial version
 
 ##Example
 <pre>
