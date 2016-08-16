@@ -218,9 +218,13 @@ Function Update-ArdoqComponent{
 
     $json = ConvertTo-Json $Object
     
+    $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
+    $UTF8Encoding = [System.Text.Encoding]::UTF8
+    [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
+       
     $URI = "$BaseURI/component/$($Object._id)"
 
-    $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method PUT -Body $json
+    $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method PUT -Body $jsonUTF8
     
     IF ($PassTruh)
     {
@@ -268,9 +272,14 @@ Function New-ArdoqComponent{
     
     $json = ConvertTo-Json $parameters
 
+    $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
+    $UTF8Encoding = [System.Text.Encoding]::UTF8
+    [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
+    
+
     $URI = "$BaseURI/component"
 
-    $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $json
+    $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
     $Object
 }
 Function Get-ArdoqModel{
