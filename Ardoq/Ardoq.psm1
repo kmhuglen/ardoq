@@ -200,6 +200,7 @@ Function Update-ArdoqComponent{
     {
         IF ($Force)
         {
+            $ForceObject = $null
             $ForceObject = Get-ArdoqComponent -Id $_._id
             $_._version = $ForceObject._version
         }
@@ -208,11 +209,12 @@ Function Update-ArdoqComponent{
     
         $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
         $UTF8Encoding = [System.Text.Encoding]::UTF8
+        $jsonUTF8 = $null
         [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
        
         $URI = "$BaseURI/component/$($_._id)"
-        
-        $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method PUT -Body $jsonUTF8
+
+        $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method PUT -Body $jsonUTF8
     
         IF ($PassTruh)
         {
