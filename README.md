@@ -7,7 +7,7 @@ You would need a token to access your organization. Read the Authorization docum
 
 ## Release notes
 0.0.1.7 - Bug fixes<br>
-0.0.1.6 - Added function Remove-ArdoqComponent and enabled array input for Update-ArdoqComponent
+0.0.1.6 - Added function Remove-ArdoqComponent and enabled array input for Update-ArdoqComponent<br>
 0.0.1.5 - Added UTF8 encoding to Update-ArdoqComponent and New-ArdoqComponent<br>
 0.0.1.4 - Removed verbose from New-ArdoqComponent<br>
 0.0.1.3 - Added function New-ArdoqComponent<br>
