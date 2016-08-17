@@ -192,28 +192,35 @@ Function Update-ArdoqComponent{
         $BaseURI = $ArdoqAPIBaseUri
     )
 
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
-    IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
-    
-    IF ($Force)
-    {
-        $ForceObject = Get-ArdoqComponent -Id $Object._id
-        $Object._version = $ForceObject._version
+    Begin{
+        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+        IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
     }
-
-    $json = ConvertTo-Json $Object
-    
-    $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
-    $UTF8Encoding = [System.Text.Encoding]::UTF8
-    [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
-       
-    $URI = "$BaseURI/component/$($Object._id)"
-
-    $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method PUT -Body $jsonUTF8
-    
-    IF ($PassTruh)
+    Process
     {
-        $Object
+        IF ($Force)
+        {
+            $ForceObject = Get-ArdoqComponent -Id $_._id
+            $_._version = $ForceObject._version
+        }
+
+        $json = ConvertTo-Json $_
+    
+        $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
+        $UTF8Encoding = [System.Text.Encoding]::UTF8
+        [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
+       
+        $URI = "$BaseURI/component/$($_._id)"
+        
+        $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method PUT -Body $jsonUTF8
+    
+        IF ($PassTruh)
+        {
+            $Object
+        }
+    }
+    End
+    {
     }
 }
 Function Remove-ArdoqComponent{
