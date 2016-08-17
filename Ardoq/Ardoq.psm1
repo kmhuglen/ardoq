@@ -226,14 +226,10 @@ Function Update-ArdoqComponent{
 Function Remove-ArdoqComponent{
     [CmdletBinding()] 
     Param(
-        [parameter(Mandatory=$false)] 
+        [parameter(Mandatory=$false,
+        ValueFromPipeline=$True)]
         [string]
         $id
-        ,
-        [Parameter(Mandatory=$True, 
-        ValueFromPipeline=$True)]
-        [Object]
-        $Object
         ,
         [parameter(Mandatory=$false)] 
         [hashtable]
@@ -249,10 +245,10 @@ Function Remove-ArdoqComponent{
     
     IF(!$Id){Write-error -Message 'Ardoq Component Id not specified.' -ErrorAction Stop}
        
-    $URI = "$BaseURI/component/$id)"
+    $URI = "$BaseURI/component/$id"
 
     $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
-    $Object
+    $object
 }
 Function New-ArdoqComponent{
     [CmdletBinding()] 
