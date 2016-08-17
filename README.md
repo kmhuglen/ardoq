@@ -6,7 +6,7 @@ Available from PowerShell Gallery: https://www.powershellgallery.com/packages/Ar
 You would need a token to access your organization. Read the Authorization documentation located at the Ardoq REST API Documentation to get your token: https://app.ardoq.com/presentation/ardoqAPI/slide/0/
 
 ## Release notes
-0.0.1.7 - Bug fixes
+0.0.1.7 - Bug fixes<br>
 0.0.1.6 - Added function Remove-ArdoqComponent and enabled array input for Update-ArdoqComponent
 0.0.1.5 - Added UTF8 encoding to Update-ArdoqComponent and New-ArdoqComponent<br>
 0.0.1.4 - Removed verbose from New-ArdoqComponent<br>
