@@ -164,14 +164,7 @@ Function Get-ArdoqComponent{
         }
     }
 
-    #$ObjectTypeName = "Ardoq.Component"
-    #if(-not (Get-TypeData -TypeName Ardoq.Component))
-    #{
-    #    Update-TypeData -TypeName Ardoq.Component -DefaultDisplayPropertySet "name","type","_id" -Force
-    #}
-    
     $objects = Invoke-RestMethod -Uri $URI -Headers $headers -Method GET -ContentType JSON
-    #$object.PSObject.TypeNames.Insert(0, "Ardoq.Component")
     $objects
 }
 Function Update-ArdoqComponent{
@@ -226,10 +219,14 @@ Function Update-ArdoqComponent{
 Function Remove-ArdoqComponent{
     [CmdletBinding()] 
     Param(
-        [parameter(Mandatory=$false,
-        ValueFromPipeline=$True)]
+        [parameter(Mandatory=$false)]
         [string]
         $id
+        ,
+        [Parameter(Mandatory=$false, 
+        ValueFromPipeline=$True)]
+        [Object]
+        $Object
         ,
         [parameter(Mandatory=$false)] 
         [hashtable]
@@ -239,16 +236,29 @@ Function Remove-ArdoqComponent{
         [string]
         $BaseURI = $ArdoqAPIBaseUri
     )
-
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
-    IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
-    
-    IF(!$Id){Write-error -Message 'Ardoq Component Id not specified.' -ErrorAction Stop}
-       
-    $URI = "$BaseURI/component/$id"
-
-    $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
-    $object
+    Begin
+    {
+        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+        IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
+    }
+    Process
+    {
+        IF($Id)
+        {
+            $URI = "$BaseURI/component/$id"
+            $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
+        }
+        ELSE
+        {
+            IF (!$_._id) { Write-error -Message 'Ardoq Component Id not specified.' -ErrorAction Stop}
+            $URI = "$BaseURI/component/$($_._id)"
+            $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
+        }
+    }
+    End
+    {
+        #write-host "Ending"
+    } 
 }
 Function New-ArdoqComponent{
     [CmdletBinding()] 
