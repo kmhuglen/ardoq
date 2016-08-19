@@ -14,18 +14,22 @@ You would need a token to access your organization. Read the Authorization docum
 0.0.1.2 - Fixed -Force argument on Function Update-ArdoqComponent<br>
 0.0.1.1 - Initial version
 
-##Example
-<pre>
-PS C:\> Find-Package Ardoq -Source PSGallery|Install-Module
-PS C:\> New-ArdoqAPIHeader -Token 11223344556677889900aabbccddeeff -SetGlobal
+## Installation
+```powershell
+Find-Package Ardoq -Source PSGallery|Install-Module
+```
+
+## Example
+```powershell
+New-ArdoqAPIHeader -Token 11223344556677889900aabbccddeeff -SetGlobal
 
 Name                           Value                                                                                                  
 ----                           -----                                                                                                  
 ArdoqAPIBaseUri                https://app.ardoq.com/api                                                                              
 ArdoqAPIHeader                 {Authorization, Content-type, Accepts}  
 
-PS C:\> $Workspace = Get-ArdoqWorkspace -Name DEMO
-PS C:\> Get-ArdoqComponent -WorkspaceID $Workspace._id|select name,type,lastModifiedByName,version
+$Workspace = Get-ArdoqWorkspace -Name DEMO
+Get-ArdoqComponent -WorkspaceID $Workspace._id|select name,type,lastModifiedByName,version
 
 name                 type               lastModifiedByName version
 ----                 ----               ------------------ -------
@@ -39,4 +43,7 @@ State 1              State              Dummy User         0.0.1
 Item 1               Item               Dummy User         0.0.1  
 Input/Output 1       Input/Output       Dummy User         0.0.1  
 Decision 1           Decision           Dummy User         0.0.1  
-</pre>
+```
+
+## Disclaimer
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
