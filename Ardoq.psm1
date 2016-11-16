@@ -82,7 +82,7 @@ Function Get-ArdoqWorkspace{
         $BaseURI = $ArdoqAPIBaseUri
     )
 
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader'-ErrorAction Stop}
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader'-ErrorAction Stop}
     IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri'-ErrorAction Stop}
 
     IF ($Id)
@@ -136,7 +136,7 @@ Function Get-ArdoqComponent{
         $BaseURI = $ArdoqAPIBaseUri
     )
 
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
     IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
 
     IF ($Id)
@@ -193,7 +193,7 @@ Function Update-ArdoqComponent{
     )
 
     Begin{
-        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
         IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
     }
     Process
@@ -247,7 +247,7 @@ Function Remove-ArdoqComponent{
     )
     Begin
     {
-        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
         IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
     }
     Process
@@ -297,7 +297,7 @@ Function New-ArdoqComponent{
         $BaseURI = $ArdoqAPIBaseUri
     )
 
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
     IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
     IF(!$WorkspaceID){Write-error -Message 'Ardoq Workspace ID not specified. Use -WorkspaceID parameter or define variabel $ArdoqWorkspaceID' -ErrorAction Stop}
     
@@ -336,7 +336,7 @@ Function Get-ArdoqModel{
         $BaseURI = $ArdoqAPIBaseUri
     )
 
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
     IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
     
     IF ($Id)
@@ -367,7 +367,7 @@ Function Get-ArdoqReference{
         $BaseURI = $ArdoqAPIBaseUri
     )
 
-    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or Set-ArdoqAPIHeader' -ErrorAction Stop}
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
     IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
     
     IF ($Id)
