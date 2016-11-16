@@ -282,7 +282,7 @@ Function New-ArdoqComponent{
         ,
         [parameter(Mandatory=$true)] 
         [string]
-        $typeid
+        $parentid
         ,
         [parameter(Mandatory=$false)] 
         [string]
@@ -305,10 +305,11 @@ Function New-ArdoqComponent{
         "name" = $name
         "description" = $description
         "rootWorkspace" = $WorkspaceId
-        "type" = $typeid
+        "parent" = $parentid
         }
     
     $json = ConvertTo-Json $parameters
+    
 
     $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
     $UTF8Encoding = [System.Text.Encoding]::UTF8
@@ -317,6 +318,7 @@ Function New-ArdoqComponent{
 
     $URI = "$BaseURI/component"
 
+    Write-verbose $jsonUTF8
     $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
     $Object
 }
