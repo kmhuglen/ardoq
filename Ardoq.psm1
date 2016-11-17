@@ -362,7 +362,7 @@ Function New-ArdoqReference{
         "source" = $sourceid
         "target" = $targetid
         "type" = $type
-        "displayText = $displayText
+        "displayText" = $displayText
         }
     
     $json = ConvertTo-Json $parameters
