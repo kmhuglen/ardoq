@@ -379,6 +379,50 @@ Function New-ArdoqReference{
     $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
     $Object
 }
+Function Remove-ArdoqReference{
+    [CmdletBinding()] 
+    Param(
+        [parameter(Mandatory=$false)]
+        [string]
+        $id
+        ,
+        [Parameter(Mandatory=$false, 
+        ValueFromPipeline=$True)]
+        [Object]
+        $Object
+        ,
+        [parameter(Mandatory=$false)] 
+        [hashtable]
+        $Headers = $ArdoqAPIHeader
+        ,
+        [parameter(Mandatory=$false)] 
+        [string]
+        $BaseURI = $ArdoqAPIBaseUri
+    )
+    Begin
+    {
+        IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
+        IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
+    }
+    Process
+    {
+        IF($Id)
+        {
+            $URI = "$BaseURI/reference/$id"
+            $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
+        }
+        ELSE
+        {
+            IF (!$_._id) { Write-error -Message 'Ardoq Reference Id not specified.' -ErrorAction Stop}
+            $URI = "$BaseURI/reference/$($_._id)"
+            $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
+        }
+    }
+    End
+    {
+        #write-host "Ending"
+    } 
+}
 Function Get-ArdoqModel{
     [CmdletBinding()] 
     Param(
