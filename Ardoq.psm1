@@ -284,6 +284,10 @@ Function New-ArdoqComponent{
         [string]
         $parentid
         ,
+        [parameter(Mandatory=$true)] 
+        [string]
+        $typeId
+        ,
         [parameter(Mandatory=$false)] 
         [string]
         $WorkspaceId = $ArdoqWorkspaceId
@@ -306,6 +310,7 @@ Function New-ArdoqComponent{
         "description" = $description
         "rootWorkspace" = $WorkspaceId
         "parent" = $parentid
+        "typeId" = $typeId
         }
     
     $json = ConvertTo-Json $parameters
