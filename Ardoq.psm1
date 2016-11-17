@@ -341,10 +341,10 @@ Function New-ArdoqReference{
         [parameter(Mandatory=$true)] 
         [int]
         $type
-        #,
-        #[parameter(Mandatory=$false)] 
-        #[string]
-        #$WorkspaceId = $ArdoqWorkspaceId
+        ,
+        [parameter(Mandatory=$true)] 
+        [string]
+        $displayText = $displayText
         ,
         [parameter(Mandatory=$false)] 
         [hashtable]
@@ -357,13 +357,12 @@ Function New-ArdoqReference{
 
     IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
     IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
-    #IF(!$WorkspaceID){Write-error -Message 'Ardoq Workspace ID not specified. Use -WorkspaceID parameter or define variabel $ArdoqWorkspaceID' -ErrorAction Stop}
     
     $parameters = @{
         "source" = $sourceid
         "target" = $targetid
-        #"rootWorkspace" = $WorkspaceId
         "type" = $type
+        "displayText = $displayText
         }
     
     $json = ConvertTo-Json $parameters
