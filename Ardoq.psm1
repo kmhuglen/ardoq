@@ -145,7 +145,7 @@ Function Get-ArdoqComponent{
 
     IF ($Id)
     {
-        $URI = "$BaseURI/component/$ID"
+        $URI = "$BaseURI/component/$ID"+"?org=$org"
     }
     ELSE
     {
@@ -153,22 +153,24 @@ Function Get-ArdoqComponent{
         IF ($Field)
         {
             IF(!$Value){Write-error -Message 'When using the -Field parameter, -Value must be spesified' -ErrorAction Stop}
-            $URI = "$BaseURI/component/fieldsearch?workspace=$WorkSpaceID&$Field=$Value"
+            $URI = "$BaseURI/component/fieldsearch?workspace=$WorkSpaceID&$Field=$Value"+"?org=$org"
         }
         ELSE
         {
             IF ($Name)
             {
-                $URI = "$BaseURI/component/search?workspace=$WorkSpaceID&name=$Name"
+                $URI = "$BaseURI/component/search?workspace=$WorkSpaceID&name=$Name"+"?org=$org"
             }
             ELSE
             {
-                $URI = "$BaseURI/component/search?workspace=$WorkSpaceID?org=$org"
+                #$URI = "$BaseURI/component/search?workspace=$WorkSpaceID"+"?org=$org"
+                $URI = "$BaseURI/component/"+"?org=$org"
             }
         }
     }
-
-    $objects = Invoke-RestMethod -Uri $URI -Headers $headers -Method GET -ContentType JSON
+    Write-Verbose $WorkspaceID
+    Write-Verbose $URI
+    $objects = Invoke-RestMethod -Uri $URI -Headers $headers -Method GET -ContentType json
     $objects
 }
 Function Update-ArdoqComponent{
