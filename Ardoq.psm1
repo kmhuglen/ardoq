@@ -327,6 +327,59 @@ Function New-ArdoqComponent{
     $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
     $Object
 }
+Function New-ArdoqReference{
+    [CmdletBinding()] 
+    Param(
+        [parameter(Mandatory=$true)]
+        [string] 
+        $sourceid
+        ,
+        [parameter(Mandatory=$true)] 
+        [string]
+        $targetid
+        ,
+        [parameter(Mandatory=$true)] 
+        [int]
+        $type
+        #,
+        #[parameter(Mandatory=$false)] 
+        #[string]
+        #$WorkspaceId = $ArdoqWorkspaceId
+        ,
+        [parameter(Mandatory=$false)] 
+        [hashtable]
+        $Headers = $ArdoqAPIHeader
+        ,
+        [parameter(Mandatory=$false)] 
+        [string]
+        $BaseURI = $ArdoqAPIBaseUri
+    )
+
+    IF(!$Headers){Write-error -Message 'Ardoq API header not specified. Use -Headers parameter or New-ArdoqAPIHeader' -ErrorAction Stop}
+    IF(!$BaseURI){Write-error -Message 'Ardoq Base API URI not specified. Use -BaseURI parameter or Set-ArdoqAPIBaseUri' -ErrorAction Stop}
+    #IF(!$WorkspaceID){Write-error -Message 'Ardoq Workspace ID not specified. Use -WorkspaceID parameter or define variabel $ArdoqWorkspaceID' -ErrorAction Stop}
+    
+    $parameters = @{
+        "source" = $sourceid
+        "target" = $targetid
+        #"rootWorkspace" = $WorkspaceId
+        "type" = $type
+        }
+    
+    $json = ConvertTo-Json $parameters
+    
+
+    $DefaultEncoding = [System.Text.Encoding]::GetEncoding('ISO-8859-1')
+    $UTF8Encoding = [System.Text.Encoding]::UTF8
+    [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
+    
+
+    $URI = "$BaseURI/reference"
+
+    Write-verbose $jsonUTF8
+    $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
+    $Object
+}
 Function Get-ArdoqModel{
     [CmdletBinding()] 
     Param(
