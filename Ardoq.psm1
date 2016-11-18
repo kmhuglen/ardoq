@@ -76,6 +76,10 @@ Function Get-ArdoqWorkspace{
         $Name
         ,
         [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
+        ,
+        [parameter(Mandatory=$false)] 
         [hashtable]
         $Headers = $ArdoqAPIHeader
         ,
@@ -192,6 +196,10 @@ Function Update-ArdoqComponent{
         $PassTruh
         ,
         [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
+        ,
+        [parameter(Mandatory=$false)] 
         [hashtable]
         $Headers = $ArdoqAPIHeader
         ,
@@ -244,6 +252,10 @@ Function Remove-ArdoqComponent{
         ValueFromPipeline=$True)]
         [Object]
         $Object
+        ,
+        [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
         ,
         [parameter(Mandatory=$false)] 
         [hashtable]
@@ -301,6 +313,10 @@ Function New-ArdoqComponent{
         $WorkspaceId = $ArdoqWorkspaceId
         ,
         [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
+        ,
+        [parameter(Mandatory=$false)] 
         [hashtable]
         $Headers = $ArdoqAPIHeader
         ,
@@ -355,6 +371,10 @@ Function New-ArdoqReference{
         $displayText = $displayText
         ,
         [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
+        ,
+        [parameter(Mandatory=$false)] 
         [hashtable]
         $Headers = $ArdoqAPIHeader
         ,
@@ -400,6 +420,10 @@ Function Remove-ArdoqReference{
         $Object
         ,
         [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
+        ,
+        [parameter(Mandatory=$false)] 
         [hashtable]
         $Headers = $ArdoqAPIHeader
         ,
@@ -439,6 +463,10 @@ Function Get-ArdoqModel{
         $Id
         ,
         [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
+        ,
+        [parameter(Mandatory=$false)] 
         [hashtable]
         $Headers = $ArdoqAPIHeader
         ,
@@ -468,6 +496,10 @@ Function Get-ArdoqReference{
         [parameter(Mandatory=$false)] 
         [string]
         $Id
+        ,
+        [parameter(Mandatory=$false)] 
+        [string]
+        $org = $ArdoqOrganization
         ,
         [parameter(Mandatory=$false)] 
         [hashtable]
