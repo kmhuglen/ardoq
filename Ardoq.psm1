@@ -61,6 +61,8 @@ Function Clear-ArdoqVariabels{
     $Global:ArdoqAPIBaseUri = $null
     $ArdoqWorkspaceId = $null
     $Global:ArdoqWorkspaceId = $null
+    $ArdoqOrganization = $null
+    $Global:ArdoqOrganization = $null
 }
 Function Get-ArdoqWorkspace{
     [CmdletBinding()] 
@@ -87,17 +89,17 @@ Function Get-ArdoqWorkspace{
 
     IF ($Id)
     {
-        $URI = "$BaseURI/workspace/$id"
+        $URI = "$BaseURI/workspace/$id"+"?org=$org"
     }
     Else
     {
         IF ($Name)
         {
-            $URI = "$BaseURI/workspace/search?name=$name"
+            $URI = "$BaseURI/workspace/search?name=$name"+"?org=$org"
         }
         ELSE
         {
-            $URI = "$BaseURI/workspace/"
+            $URI = "$BaseURI/workspace"+"?org=$org"
         }
     }
     
@@ -164,7 +166,7 @@ Function Get-ArdoqComponent{
             ELSE
             {
                 #$URI = "$BaseURI/component/search?workspace=$WorkSpaceID"+"?org=$org"
-                $URI = "$BaseURI/component/"+"?org=$org"
+                $URI = "$BaseURI/component"+"?org=$org"
             }
         }
     }
@@ -218,7 +220,7 @@ Function Update-ArdoqComponent{
         $jsonUTF8 = $null
         [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
        
-        $URI = "$BaseURI/component/$($_._id)"
+        $URI = "$BaseURI/component/$($_._id)"+"?org=$org"
 
         $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method PUT -Body $jsonUTF8
     
@@ -260,13 +262,13 @@ Function Remove-ArdoqComponent{
     {
         IF($Id)
         {
-            $URI = "$BaseURI/component/$id"
+            $URI = "$BaseURI/component/$id"+"?org=$org"
             $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
         }
         ELSE
         {
             IF (!$_._id) { Write-error -Message 'Ardoq Component Id not specified.' -ErrorAction Stop}
-            $URI = "$BaseURI/component/$($_._id)"
+            $URI = "$BaseURI/component/$($_._id)"+"?org=$org"
             $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
         }
     }
@@ -327,7 +329,7 @@ Function New-ArdoqComponent{
     [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
     
 
-    $URI = "$BaseURI/component"
+    $URI = "$BaseURI/component"+"?org=$org"
 
     Write-verbose $jsonUTF8
     $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
@@ -379,7 +381,7 @@ Function New-ArdoqReference{
     [System.Text.Encoding]::Convert($DefaultEncoding, $DefaultEncoding, $UTF8Encoding.GetBytes(($json))) | % { $jsonUTF8 += [char]$_}
     
 
-    $URI = "$BaseURI/reference"
+    $URI = "$BaseURI/reference"+"?org=$org"
 
     Write-verbose $jsonUTF8
     $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
@@ -414,13 +416,13 @@ Function Remove-ArdoqReference{
     {
         IF($Id)
         {
-            $URI = "$BaseURI/reference/$id"
+            $URI = "$BaseURI/reference/$id"+"?org=$org"
             $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
         }
         ELSE
         {
             IF (!$_._id) { Write-error -Message 'Ardoq Reference Id not specified.' -ErrorAction Stop}
-            $URI = "$BaseURI/reference/$($_._id)"
+            $URI = "$BaseURI/reference/$($_._id)"+"?org=$org"
             $Object = Invoke-RestMethod -Uri $URI -Headers $headers -Method Delete
         }
     }
@@ -450,11 +452,11 @@ Function Get-ArdoqModel{
     
     IF ($Id)
     {
-        $URI = "$BaseURI/model/$Id"
+        $URI = "$BaseURI/model/$Id"+"?org=$org"
     }
     ELSE
     {
-        $URI = "$BaseURI/model/"
+        $URI = "$BaseURI/model"+"?org=$org"
     }
 
     $Objects = Invoke-RestMethod -Uri $URI -Headers $headers -Method GET -ContentType JSON
@@ -481,11 +483,11 @@ Function Get-ArdoqReference{
     
     IF ($Id)
     {
-        $URI = "$BaseURI/reference/$Id"
+        $URI = "$BaseURI/reference/$Id"+"?org=$org"
     }
     ELSE
     {
-        $URI = "$BaseURI/reference/"
+        $URI = "$BaseURI/reference"+"?org=$org"
     }
 
     $Objects = Invoke-RestMethod -Uri $URI -Headers $headers -Method GET -ContentType JSON
