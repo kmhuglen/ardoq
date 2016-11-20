@@ -348,7 +348,17 @@ Function New-ArdoqComponent{
     $URI = "$BaseURI/component"+"?org=$org"
 
     Write-verbose $jsonUTF8
-    $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
+
+    Try
+    {
+        $Object = Invoke-RestMethod -Uri $URI -Headers $Headers -Method Post -Body $jsonUTF8
+    }
+    Catch
+    {
+        Write-error $_.Exception.ToString()
+        $error[0] | Format-List -Force
+    }  
+
     $Object
 }
 Function New-ArdoqReference{
