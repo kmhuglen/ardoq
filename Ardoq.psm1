@@ -169,8 +169,7 @@ Function Get-ArdoqComponent{
             }
             ELSE
             {
-                #$URI = "$BaseURI/component/search?workspace=$WorkSpaceID"+"?org=$org"
-                $URI = "$BaseURI/component"+"?org=$org"
+                $URI = "$BaseURI/component/fieldsearch?workspace=$WorkSpaceID"+"?org=$org"
             }
         }
     }
